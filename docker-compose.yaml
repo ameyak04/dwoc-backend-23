@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  db:
+    image: mongo:latest
+    container_name: DWOC-db
+    restart: always
+    volumes:
+      - ./volume/mongoData/:/data/db
+
+  backend:
+    build: .
+    container_name: DWOC-backend-23 
+    ports:
+      - "${PORT}:4000"
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env
+
+  mongo-express:
+    image: mongo-express:latest
+    ports:
+      - "${ME_PORT}:8081"
+    container_name: DWOC-mongo_express
+    restart: always
+    depends_on:
+      - db
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: "${ME_USERNAME}"
+      ME_CONFIG_BASICAUTH_PASSWORD: "${ME_PASSWORD}"
+      ME_CONFIG_MONGODB_SERVER: "${ME_HOST}"
+      ME_CONFIG_SITE_BASEURL: "${ME_BASE_URL}"
+    logging:
+      driver: "none"
+    env_file:
+      - .env
+

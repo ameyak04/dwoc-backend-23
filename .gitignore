@@ -23,7 +23,7 @@ build
 *.sw?
 
 .env
-
+./volume
 #config
 config.ts
 src\Config\config.ts
