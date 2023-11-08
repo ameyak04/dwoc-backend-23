@@ -28,8 +28,7 @@ const createOrganisation = asyncHandler(async (req: any, res: any) => {
     !req.body.name ||
     !req.body.githubUrl ||
     !req.body.description ||
-    !req.body.miniDescription ||
-    !req.body.orgType
+    !req.body.miniDescription
   ) {
     res.status(400);
     throw new Error("Please fill all the fields");
@@ -41,7 +40,6 @@ const createOrganisation = asyncHandler(async (req: any, res: any) => {
     githubUrl: req.body.githubUrl,
     description: req.body.description,
     miniDescription: req.body.miniDescription,
-    orgType: req.body.orgType,
   });
   const organisation = await newOrganisation.save();
   const user = await User.findByIdAndUpdate(

@@ -45,19 +45,6 @@ const organisationSchema = new mongoose.Schema({
     enum: ["PENDING", "REJECTED", "ACCEPTED"],
     default: "PENDING",
   },
-  orgType: {
-    type: String,
-    enum: [
-      "EXTERNAL",
-      "FOODANDTRAVEL",
-      "FUN",
-      "UTILITIES",
-      "PROGRAMMINGTOOLS",
-      "GENERICTOOLS",
-      "GAMES",
-    ],
-    default: "EXTERNAL",
-  },
 });
 
 const Organisation = mongoose.model("Organisation", organisationSchema);
